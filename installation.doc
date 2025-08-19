@@ -1,0 +1,261 @@
+# Video Steganography Application - Installation and Usage Guide
+
+## System Requirements
+
+- **Operating System**: Windows 10 or later
+- **Python**: 3.7 or later
+- **IDE**: VS Code (recommended)
+- **RAM**: Minimum 4GB (8GB recommended for large videos)
+- **Storage**: At least 1GB free space for temporary files
+
+## Installation Instructions
+
+### 1. Install Python Dependencies
+
+Open Command Prompt or PowerShell as Administrator and run:
+
+```bash
+pip install opencv-python==4.8.1.78
+pip install numpy==1.24.3
+pip install Pillow==10.0.1
+pip install python-docx==0.8.11
+pip install cryptography==41.0.7
+```
+
+Or install all at once using the requirements file:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Download and Setup Application Files
+
+1. Create a new folder for the application (e.g., `VideoSteganography`)
+2. Save all Python files in this folder:
+   - `main.py` (main application)
+   - `video_processor.py`
+   - `file_handler.py`
+   - `steganography_engine.py`
+   - `requirements.txt`
+
+### 3. Verify Installation
+
+Run the following command to test if all dependencies are installed correctly:
+
+```bash
+python -c "import cv2, numpy, PIL, docx, cryptography; print('All dependencies installed successfully!')"
+```
+
+## Running the Application
+
+### From Command Line
+
+Navigate to the application folder and run:
+
+```bash
+python main.py
+```
+
+### From VS Code
+
+1. Open VS Code
+2. Open the application folder
+3. Open `main.py`
+4. Press `F5` or click "Run Python File"
+
+## Application Features
+
+### Supported File Formats
+
+**Cover Videos:**
+- MP4 (.mp4)
+- AVI (.avi)
+- MOV (.mov)
+- MKV (.mkv)
+
+**Secret Files:**
+- Text files (.txt)
+- Documents (.doc, .docx)
+- Images (.jpg, .jpeg, .png)
+- Videos (.mp4, .avi)
+
+**Video Specifications:**
+- Maximum size: 50 MB
+- Supported resolutions: 480p, 720p, 1080p
+- Frame rates: Any (optimized for 24-30 fps)
+
+### Steganography Algorithms
+
+1. **LSB (Least Significant Bit)**
+   - Higher capacity
+   - Faster processing
+   - Good for text and small files
+   - Minimal quality loss
+
+2. **DCT (Discrete Cosine Transform)**
+   - Better security
+   - More robust against compression
+   - Lower capacity
+   - Slower processing
+
+## Usage Instructions
+
+### Hiding Data in Video
+
+1. **Select Cover Video**: Click "Browse" in the Cover Video section
+   - Choose a video file (max 50 MB)
+   - View video information and maximum payload capacity
+
+2. **Select Secret File**: Click "Browse" in the Secret File section
+   - Choose file to hide
+   - Check file size compatibility warning
+
+3. **Optional Encryption**: 
+   - Check "Use password encryption"
+   - Enter a strong password
+
+4. **Choose Output Path**: Click "Browse" in Output Video section
+   - Select destination for steganographic video
+
+5. **Configure Settings**:
+   - Go to Settings tab
+   - Choose algorithm (LSB or DCT)
+
+6. **Hide Data**: Click "Hide Data in Video"
+   - Monitor progress bar
+   - Check log for status updates
+
+### Extracting Hidden Data
+
+1. **Select Steganographic Video**: Click "Browse" in the Extract tab
+   - Choose video containing hidden data
+
+2. **Password (if used)**: 
+   - Check "File is password protected" if needed
+   - Enter the correct password
+
+3. **Choose Output Directory**: Select where to save extracted file
+
+4. **Extract Data**: Click "Extract Hidden Data"
+   - Monitor progress and check log
+
+## Troubleshooting
+
+### Common Issues
+
+**1. "Cannot open video file"**
+- Check if video format is supported
+- Ensure video file is not corrupted
+- Try converting video to MP4 format
+
+**2. "Secret file too large"**
+- Use a higher resolution video
+- Compress the secret file
+- Choose LSB algorithm for higher capacity
+
+**3. "Invalid password or corrupted data"**
+- Verify the correct password
+- Ensure same algorithm was used for hiding/extracting
+- Check if video was modified after hiding data
+
+**4. "Module not found" errors**
+- Reinstall required packages
+- Check Python version compatibility
+- Use virtual environment if needed
+
+### Performance Tips
+
+1. **For Large Videos:**
+   - Close other applications
+   - Use SSD storage
+   - Process during low system usage
+
+2. **For Better Quality:**
+   - Use high-resolution source videos
+   - Choose DCT algorithm for important data
+   - Avoid re-compressing videos
+
+3. **For Maximum Capacity:**
+   - Use LSB algorithm
+   - Choose 1080p videos
+   - Use longer duration videos
+
+## Security Considerations
+
+1. **Password Protection:**
+   - Use strong, unique passwords
+   - Don't share passwords through insecure channels
+   - Consider using key files for additional security
+
+2. **File Handling:**
+   - Delete temporary files after use
+   - Use secure deletion tools for sensitive data
+   - Avoid storing passwords in plain text
+
+3. **Video Distribution:**
+   - Be aware of compression when uploading online
+   - Test extraction after any video processing
+   - Consider using lossless compression
+
+## Advanced Usage
+
+### Batch Processing
+
+For processing multiple files, you can modify the main script to accept command-line arguments:
+
+```python
+import sys
+if len(sys.argv) > 1:
+    # Add command-line processing logic
+    pass
+```
+
+### Custom Algorithms
+
+To add new steganography algorithms:
+
+1. Extend the `SteganographyEngine` class
+2. Implement new hiding/extraction methods
+3. Update the GUI algorithm selection
+
+### Integration with Other Tools
+
+The application modules can be imported and used in other Python scripts:
+
+```python
+from steganography_engine import SteganographyEngine
+from video_processor import VideoProcessor
+
+# Create instances and use programmatically
+engine = SteganographyEngine()
+processor = VideoProcessor()
+```
+
+## Technical Specifications
+
+### Memory Requirements
+
+- **LSB Algorithm**: ~2x video file size in RAM
+- **DCT Algorithm**: ~3x video file size in RAM
+- **Recommended**: 8GB RAM for 50MB videos
+
+### Processing Time Estimates
+
+- **480p video (5 min)**: 2-5 minutes
+- **720p video (5 min)**: 5-10 minutes  
+- **1080p video (5 min)**: 10-20 minutes
+
+Times vary based on system specifications and algorithm choice.
+
+## Support and Updates
+
+For issues or feature requests:
+
+1. Check the troubleshooting section
+2. Review the log output for error details
+3. Ensure all dependencies are correctly installed
+4. Test with smaller files first
+
+## License and Disclaimer
+
+This application is provided for educational and legitimate steganography purposes. Users are responsible for complying with applicable laws and regulations regarding data hiding and privacy.
